@@ -1,0 +1,100 @@
+:- use_module(library(http/thread_httpd)).
+:- use_module(library(http/http_dispatch)).
+:- use_module(library(http/http_parameters)).
+:- use_module(library(uri)).
+:- use_module(library(http/html_write)).
+:- http_handler(root(processa_pedido), processa_pedido, []).
+:- http_handler(root(cancela_pedido), cancelar_handler, []).
+:- dynamic(nomeCliente/2).
+:- dynamic(telCliente/2).
+:- dynamic(pedido/7).
+
+servidor(Porta) :-
+    http_server(http_dispatch, [port(Porta)]).
+
+processa_pedido(R) :-
+    format('Content-type: text/html~n~n'),
+    format('<h1>Dados do pedido</h1>~n'),
+    http_parameters(R,[nomeCliente(C,[atom_string]),
+    telCliente(T,[atom_string]),
+    emailCliente(E,[]),
+    tamanho(S,[]),
+    ing(I,[list(atom)]),
+    tempo(H,[]),
+    obs(O,[])
+    ]),
+    format('<table>~n'),
+    format('<tr>~n'),
+    format('<td>Nome do cliente:</td>~n'),
+    format('<td>~w</td>~n',[C]),
+    format('</tr>~n'),
+    format('<tr>~n'),
+    format('<td>Telefone:</td>~n'),
+    format('<td>~w</td>~n',[T]),
+    format('</tr>~n'),
+    format('<tr>~n'),
+    format('<td>E-mail:</td>~n'),
+    format('<td>~w</td>~n',[E]),
+    format('</tr>~n'),
+    format('<tr>~n'),
+    format('<td>Tamanho:</td>~n'),
+    format('<td>~w</td>~n',[S]),
+    format('</tr>~n'),
+    format('<tr>~n'),
+    format('<td>Ingredientes:</td>~n'),
+    format('<td>~w</td>~n',[I]),
+    format('</tr>~n'),
+    format('<tr>~n'),
+    format('<td>Horï¿½rio de entrega desejado:</td>~n'),
+    format('<td>~w</td>~n',[H]),
+    format('</tr>~n'),
+    format('<tr>~n'),
+    format('<td>Instruï¿½ï¿½es para entrega:</td>~n'),
+    format('<td>~w</td>~n',[O]),
+    format('</tr>~n'),
+    format('</table>~n'),
+    append('pedidos.pl'),
+    nl,
+    write('pedido(\''),
+    write(C),
+    write('\','),
+    write('\''),
+    write(T),
+    write('\','),
+    write('\''),
+    write(E),
+    write('\','),
+    write('\''),
+    write(S),
+    write('\','),
+    write('\''),
+    write(I),
+    write('\','),
+    write('\''),
+    write(H),
+    write('\','),
+    write('\''),
+    write(O),
+    write('\')'),
+    write(.),
+    nl,
+    told.
+cancelar_handler(Y):-
+    http_parameters(Y, [nomeCliente(C, [])]),
+    reconsult('pedidos.pl'),
+    retract(pedido(C, _, _, _, _, _, _)),
+    tell('pedidos.pl'),
+    listing(pedido),
+    told,
+    reply_html_page(title('Pizzaria toda hora'),
+    [ h1('Pedido de cancelamento'),
+        p(['Nome:',C]),
+        h2('O pedido foi cancelado com sucesso!')
+    ]).
+
+
+cancelar_handler(_):-
+    reply_html_page(title('Pizzaria toda hora'),
+    [ h1('Pedido de exclusão'),
+        h2('Esse pedido não foi localizado em nossa base de dados')
+    ]).
