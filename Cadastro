@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+ <title>Pizzaria toda hora</title>
+ <style>
+  body {
+   background-color: #F2F2F2;
+   font-family: Arial, sans-serif;
+  }
+  form {
+   background-color: white;
+   width: 400px;
+   margin: 0 auto;
+   padding: 20px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+  }
+  label {
+   font-weight: bold;
+   margin-top: 10px;
+   display: block;
+  }
+  input[type="text"], input[type="email"], input[type="tel"], textarea {
+   width: 100%;
+   padding: 5px;
+   margin-top: 5px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-size: 14px;
+  }
+  fieldset {
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   padding: 10px;
+   margin-top: 20px;
+  }
+  legend {
+   font-weight: bold;
+  }
+  button {
+   background-color: #4CAF50;
+   color: white;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   margin-top: 20px;
+  }
+ </style>
+</head>
+<body>
+<form method="post" enctype="application/x-www-form-urlencoded" action="http://localhost:8000/processa_pedido">
+<p><label>Nome do Cliente: <input name="nomeCliente"></label></p>
+<p><label>Telefone: <input type="tel" name="telCliente"></label></p>
+<p><label>E-mail: <input type="email" name="emailCliente"></label></p>
+<fieldset>
+ <legend> Tamanho da Pizza </legend>
+ <p><label> <input type="radio" name="tamanho" value="p"> Pequena </label></p>
+ <p><label> <input type="radio" name="tamanho" value="m"> Média </label></p>
+ <p><label> <input type="radio" name="tamanho" value="g"> Grande </label></p>
+</fieldset>
+<fieldset>
+ <legend> Ingrediente </legend>
+ <p><label> <input type="checkbox" name="ing" value="tom"> Tomate </label></p>
+ <p><label> <input type="checkbox" name="ing" value="pre"> Presunto</label></p>
+ <p><label> <input type="checkbox" name="ing" value="ceb"> cebola </label></p>
+<p><label> <input type=checkbox name="ing" value="que"> Queijo </label></p>
+</fieldset>
+<p><label>Horário de entrega desejado: <input type=time min="11:00" max="21:00"
+step="900" name="tempo"></label></p>
+<p><label>Instruções para entrega: <textarea name="obs"></textarea></label></p>
+<p><button>Enviar Pedido</button></p>
+</form>
+</body>
+</html>
