@@ -1,0 +1,113 @@
+
+
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+ <title>Scarlatto Pizzaria </title>
+ <style>
+  /* CSS for menu */
+  .menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      background-color: black;
+  }
+  .menu a {
+      padding: 10px;
+      text-decoration: none;
+      color: white;
+      font-size: 1.2em;
+      margin: 0 20px;
+  }
+  .menu a:hover {
+      background-color: #f2f2f2;
+      color: black;
+  }
+  .header {
+      text-align: center;
+      margin-top: 50px;
+  }
+  h1 {
+   font-size: 4em;
+   color: black;
+   text-shadow: 1px 1px #f2f2f2;
+   border: 3px solid black; /* Adicionar borda */
+   padding: 10px; /* Adicionar espaçamento */
+}
+ h2 {
+   font-size: 1em;
+   color: #333;
+   text-transform: uppercase;
+   letter-spacing: 3px;
+   margin-top: 30px;
+}
+ h3 {
+   font-size: 1em;
+   color: #333;
+   text-transform: uppercase;
+   letter-spacing: 3px;
+   margin-top: 30px;
+}
+
+  .slideshow {
+      width: 80%;
+      height: 500px;
+      margin: 50px auto;
+      position: relative;
+  }
+  .slideshow img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s;
+  }
+  .slideshow img.active {
+      opacity: 1;
+  }
+  .footer {
+    height: 50px;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 1.2em;
+  }
+ </style>
+</head>
+<body>
+ <div class="menu">
+   <a href="cadastrar_pedido.html">Cadastrar Pedido</a>
+   <a href="cancelar_pedido.html">Cancelar Pedido</a>
+ </div>
+ <div class="header">
+   <h1>Scarlatto Pizzaria</h1>
+   <h2>Italian pizza</h2>
+   <h3>Since 1985</h3>
+ </div>
+ <div class="slideshow">
+   <img src="https://imgs.search.brave.com/IUUP-WT9zFXlPeroZpPdrTDgWGVPYIQmFFRMfkvKh0Q/rs:fit:985:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5O/SzFEbGdxY204ODB5/NzkzZUxxLTBRSGFE/ayZwaWQ9QXBp">
+   <img src="https://imgs.search.brave.com/am3OPIvI8oRY418urDvyD2z0hM-EdyjHseccxeSlykg/rs:fit:729:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5t/YmpLZHdqZTJJclNB/SEF3RkZIT2d3SGFF/MCZwaWQ9QXBp">
+   <img src="https://imgs.search.brave.com/wSSsybK30DLPfYn5aVXzSjdDCJRHBiVPkfnVKXgXjGE/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5X/UWNsMGRqRlV1Wkhv/bTFZRVdMMm13SGFF/OCZwaWQ9QXBp">
+ </div>
+ <div class="footer">
+   Todos os direitos reservados &copy pizzaria Toda Hora; 2023
+ </div>
+ <script>
+   var slides = document.querySelectorAll(".slideshow img");
+   var currentSlide = 0;
+   setInterval(changeSlide, 2000);
+   
+   function changeSlide() {
+       slides[currentSlide].classList.remove("active");
+       currentSlide = (currentSlide + 1) % slides.length;
+       slides[currentSlide].classList.add("active");
+   }
+ </script>
+</body>
+</html>
